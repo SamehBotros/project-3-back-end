@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/cart")
+@CrossOrigin
 public class CartController {
     @Autowired
     CartServiceImpl cartService;
@@ -25,7 +26,7 @@ public class CartController {
     ResponseEntity<CartPojo> updateCart(@RequestBody CartPojo cart) throws ApplicationException {
         return ResponseEntity.ok()
                 .header("Content-type", "application/json")
-                .body(cartService.addCart(cart));
+                .body(cartService.updateCart(cart));
 
     }
 

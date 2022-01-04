@@ -66,8 +66,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	  .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
 	   and().authorizeRequests().antMatchers("/api/auth/**").permitAll().and()
 	  .authorizeRequests().antMatchers("/h2-console/**").permitAll().and()
-      .authorizeRequests().antMatchers("/api/product-and-discount").permitAll().and()
-      .authorizeRequests().antMatchers("/api/product-and-discount/**").permitAll().and()
+      .authorizeRequests().antMatchers("/api/product-discount").permitAll().and()
+      .authorizeRequests().antMatchers("/api/product-discount/**").permitAll().and()
       .authorizeRequests().antMatchers("/api/products").permitAll().and()
       .authorizeRequests().antMatchers("/api/auth/signup").permitAll().and()
       .authorizeRequests().antMatchers("/combined/Disc/Products").permitAll().and()

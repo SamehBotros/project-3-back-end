@@ -6,54 +6,48 @@ import java.util.ArrayList;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.project3.revtech.pojo.TransactionPojo;
 import com.project3.revtech.service.TransactionService;
 
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/transaction")
+@CrossOrigin
 public class TransactionController {
 
 	@Autowired
-	TransactionService TSI;
+	TransactionService transactionService;
 	
-	@GetMapping("transaction")
+	@GetMapping()
 	public List<TransactionPojo> getAllTransactions() {
-		return TSI.getAllTransactions();
+		return transactionService.getAllTransactions();
 	}
 	
-	@GetMapping("transaction/{tid}")
+	@GetMapping("{tid}")
 	public TransactionPojo getTransactionById(@PathVariable int transactionId) {
-		return TSI.getTransactionById(transactionId);
+		return transactionService.getTransactionById(transactionId);
 	}
 	
-	@GetMapping("transaction/cart/{cid}")
+	@GetMapping("cart/{cid}")
 	public List<TransactionPojo> getCartTransactions(@PathVariable int cartId) {
-		return TSI.findAllTransactionsInCart(cartId);
+		return transactionService.findAllTransactionsInCart(cartId);
 	}
 	
-	@PostMapping("transaction")
-	public TransactionPojo createTransaction(@Valid @RequestBody TransactionPojo tp) {
-		return TSI.createTransaction(tp);
+	@PostMapping()
+	public TransactionPojo createTransaction(@Valid @RequestBody TransactionPojo transactionPojo) {
+		return transactionService.createTransaction(transactionPojo);
 	}
 	
-	@PutMapping("transaction")
-	public TransactionPojo UpdateTransaction(@Valid @RequestBody TransactionPojo tp) {
-		return TSI.updateTransaction(tp);
+	@PutMapping()
+	public TransactionPojo UpdateTransaction(@Valid @RequestBody TransactionPojo transactionPojo) {
+		return transactionService.updateTransaction(transactionPojo);
 	}
 	
 	@DeleteMapping("transaction")
 	public TransactionPojo deleteTransaction(@Valid @RequestBody TransactionPojo tp) {
-		return TSI.deleteTransaction(tp);
+		return transactionService.deleteTransaction(tp);
 	}
 	
 }

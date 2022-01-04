@@ -9,7 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/product-and-discount")
+@CrossOrigin
+@RequestMapping("api/product-discount")
 public class ProductAndDiscountController {
 
     @Autowired

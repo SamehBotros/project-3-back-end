@@ -20,6 +20,9 @@ VALUES(1, 2);
 INSERT INTO user_details(user_id, email, username, password, first_name, last_name, address, contact)
 VALUES('1','admin@email.com','admin', '$2a$10$MPZozc4ZGXGAPYfcahvwZusPR9opwnWomMoIXYFB0Dk6hpdi0ZCde', 'John', 'Doe', '35 Enterprise Ln, Los Angeles, CA 90001','555-222-5555');
 
+INSERT INTO user_details(email, username, password, first_name, last_name, address, contact)
+VALUES('customer@email.com','customer', '$2a$10$KgNaOf.aVTq7oiig9Wq6vuYlvz09H34Vb0FIUOr/cBhJaYESRYgGm', 'normal', 'guy', '101 consumer Ln, riverside, CA 90010','222-222-9999');
+
 -- #------- PRODUCT DATA --------
 
 INSERT INTO product_details(image_url, product_category, product_cost, product_description, product_name, product_qty, product_removed, product_sku)
@@ -36,11 +39,11 @@ VALUES('https://media.istockphoto.com/photos/apple-macbook-pro-picture-id1359231
 
 -- #------- CART DATA --------
 
---INSERT INTO cart_details(user_id, cart_paid, cart_removed, cart_total) VALUES ( 1, FALSE, FALSE, 100000);
+INSERT INTO cart_details(user_id, cart_paid, cart_removed, cart_total) VALUES ( 1, FALSE, FALSE, 100000);
 
---INSERT INTO cart_items(cart_id, product_id, cart_qty) VALUES ( 1, 1, 2 );
+INSERT INTO cart_items(cart_id, product_id, cart_qty) VALUES ( 1, 1, 2 );
 
---INSERT INTO cart_items(cart_id, product_id, cart_qty) VALUES ( 1, 2, 1 );
+INSERT INTO cart_items(cart_id, product_id, cart_qty) VALUES ( 1, 2, 1 );
 
 -- #------- DISCOUNT DATA --------
 

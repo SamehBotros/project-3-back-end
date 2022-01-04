@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -18,13 +19,14 @@ import com.project3.revtech.entity.Transaction;
 @Service
 @Transactional
 public class TransactionServiceImpl implements TransactionService{
-	
-	TransactionRepository TR;
+
+	@Autowired
+	TransactionRepository transactionRepository;
 
 	@Override
 	public List<TransactionPojo> getAllTransactions() {
 		
-		List<Transaction> allTransactionsEntity = this.TR.findAll();
+		List<Transaction> allTransactionsEntity = this.transactionRepository.findAll();
 		List<TransactionPojo> allTransactionsPojo = new LinkedList<TransactionPojo>();
 		
 		allTransactionsEntity.forEach((transaction) -> {
@@ -36,7 +38,7 @@ public class TransactionServiceImpl implements TransactionService{
 
 	@Override
 	public TransactionPojo getTransactionById(int transactionId) {
-		Optional<Transaction> optional = this.TR.findById(transactionId);
+		Optional<Transaction> optional = this.transactionRepository.findById(transactionId);
 		
 		Transaction transaction = optional.get();
 		TransactionPojo transactionPojo = new TransactionPojo(transaction.getTransactionId(), transaction.getTransactionDate(), transaction.getCartId());
@@ -46,7 +48,7 @@ public class TransactionServiceImpl implements TransactionService{
 
 	@Override
 	public List<TransactionPojo> findAllTransactionsInCart(int cartId) {
-		List<Transaction> allTransactionsEntity = this.TR.findAllByCartId(cartId);
+		List<Transaction> allTransactionsEntity = this.transactionRepository.findAllByCartId(cartId);
 		List<TransactionPojo> allTransactionsPojo = new LinkedList<TransactionPojo>();
 		
 		allTransactionsEntity.forEach((transaction) -> {
@@ -57,31 +59,33 @@ public class TransactionServiceImpl implements TransactionService{
 	}
 
 	@Override
-	public TransactionPojo createTransaction(TransactionPojo tp) {
-		Transaction transaction = new Transaction(tp.getTransactionId(), tp.getTransactionDate(), tp.getCartId());
-		Transaction created = this.TR.saveAndFlush(transaction);
-		
-		
-		TransactionPojo transactionPojo = new TransactionPojo(created.getTransactionId(), created.getTransactionDate(), created.getCartId());
+	public TransactionPojo createTransaction(TransactionPojo transactionPojo) {
+		Transaction transaction = new Transaction(transactionPojo.getCartId());
+		System.out.println(transaction);
+		Transaction createdTransaction = this.transactionRepository.saveAndFlush(transaction);
+//		TransactionPojo newTransactionPojo = new TransactionPojo(created.getTransactionId(), created.getTransactionDate(), created.getCartId());
+		transactionPojo.setTransactionId(createdTransaction.getTransactionId());
+		transactionPojo.setTransactionDate(createdTransaction.getTransactionDate());
+		transactionPojo.setCartId(createdTransaction.getCartId());
+
+		return transactionPojo;
+	}
+
+	@Override
+	public TransactionPojo deleteTransaction(TransactionPojo transactionPojo) {
+		Transaction transaction = new Transaction(transactionPojo.getTransactionId(), transactionPojo.getTransactionDate(), transactionPojo.getCartId());
+		this.transactionRepository.delete(transaction);
 			
 		return transactionPojo;
 	}
 
 	@Override
-	public TransactionPojo deleteTransaction(TransactionPojo tp) {
-		Transaction transaction = new Transaction(tp.getTransactionId(), tp.getTransactionDate(), tp.getCartId());
-		this.TR.delete(transaction);
-			
-		return tp;
-	}
-
-	@Override
-	public TransactionPojo updateTransaction(TransactionPojo tp) {
-		Transaction transaction = new Transaction(tp.getTransactionId(), tp.getTransactionDate(), tp.getCartId());
-		Transaction updated = this.TR.saveAndFlush(transaction);
+	public TransactionPojo updateTransaction(TransactionPojo transactionPojo) {
+		Transaction transaction = new Transaction(transactionPojo.getTransactionId(), transactionPojo.getTransactionDate(), transactionPojo.getCartId());
+		Transaction updated = this.transactionRepository.saveAndFlush(transaction);
 		
 		
-		TransactionPojo transactionPojo = new TransactionPojo(updated.getTransactionId(), updated.getTransactionDate(), updated.getCartId());
+		TransactionPojo newTransactionPojo = new TransactionPojo(updated.getTransactionId(), updated.getTransactionDate(), updated.getCartId());
 			
 		return transactionPojo;
 	}

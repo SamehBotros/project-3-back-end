@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 // @Getter
 // @Setter
@@ -35,6 +36,35 @@ public class Transaction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "transaction_id")
 	private int transactionId;
+
+	@CreationTimestamp
+	@Column(name = "transaction_date")
+	private Timestamp transactionDate;
+
+	@Column(name = "cart_id")
+	private int cartId;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cart_id", nullable = false, insertable = false, updatable = false)
+	private Cart cart;
+
+	public Transaction(int transactionId, @NotNull Timestamp transactionDate, int cartId, Cart cart) {
+		super();
+		this.transactionId = transactionId;
+		this.transactionDate = transactionDate;
+		this.cartId = cartId;
+		this.cart = cart;
+	}
+
+	public Transaction(int transactionId, Timestamp transactionDate, int cartId) {
+		this.transactionId = transactionId;
+		this.transactionDate = transactionDate;
+		this.cartId = cartId;
+	}
+
+	public Transaction(int cartId) {
+		this.cartId = cartId;
+	}
 
 	public int getTransactionId() {
 		return transactionId;
@@ -57,39 +87,6 @@ public class Transaction {
 	}
 
 	public void setCartId(int cartId) {
-		this.cartId = cartId;
-	}
-
-	public Cart getCart() {
-		return cart;
-	}
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-
-	@NotNull
-	@Column(name = "transaction_date")
-	private Timestamp transactionDate;
-
-	@Column(name = "cart_id")
-	private int cartId;
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cart_id", nullable = false, insertable = false, updatable = false)
-	private Cart cart;
-
-	public Transaction(int transactionId, @NotNull Timestamp transactionDate, int cartId, Cart cart) {
-		super();
-		this.transactionId = transactionId;
-		this.transactionDate = transactionDate;
-		this.cartId = cartId;
-		this.cart = cart;
-	}
-
-	public Transaction(int transactionId, Timestamp transactionDate, int cartId) {
-		this.transactionId = transactionId;
-		this.transactionDate = transactionDate;
 		this.cartId = cartId;
 	}
 }

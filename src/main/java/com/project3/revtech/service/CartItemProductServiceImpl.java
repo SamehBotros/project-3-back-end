@@ -40,15 +40,15 @@ public class CartItemProductServiceImpl implements CartItemProductService {
         if (cartEntity == null) {
             cartEntity = new Cart(userId, 0, false, false);
             cartEntity = cartRepository.saveAndFlush(cartEntity);
+            System.out.println();
         }
         return getCartAndItemsPojo(cartEntity);
     }
 
     @NotNull
     private CartAndItemsPojo getCartAndItemsPojo(Cart cartEntity) {
-        List<CartItem> cartItems = cartEntity.getCartItems();
+        List<CartItem> cartItems = cartEntity.getCartItems() == null ? new ArrayList<CartItem>(): cartEntity.getCartItems();
         List<ItemProductDiscountPojo> joinedDataItems = new ArrayList<ItemProductDiscountPojo>();
-
         for (CartItem tempItem : cartItems) {
             Product tempProduct = tempItem.getProduct();
             Discount tempDiscount = (tempProduct.getDiscount() == null ? new Discount(true) : tempProduct.getDiscount());

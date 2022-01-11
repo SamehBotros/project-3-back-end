@@ -4,6 +4,7 @@ import com.project3.revtech.exception.ApplicationException;
 import com.project3.revtech.pojo.ProductPojo;
 import com.project3.revtech.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,44 +20,48 @@ public class ProductController {
 
     // Post endPoint Api
     // http://localhost:7777/api/products
-    @PostMapping(value = "products")
+    //@PostMapping(value = "products")
+    //For Rowel Team Product -  JWT Specific Mapping
+    @PostMapping(value = "products/add")
+    // http://localhost:7777/api/products/add
     ProductPojo  addProduct(@Valid @RequestBody ProductPojo productPojo) throws ApplicationException{
         return  productService.addProductService(productPojo);
     }
 
     // Put endPoint Api - Updating by id
-    // http://localhost:7777/api/products/2
-    @PutMapping("products/{pid}")
+    // http://localhost:7777/api/products/update/2
+    //@PutMapping("products/{pid}")
+    //For Rowel Team Product - JWT Specific Mapping
+    @PutMapping("products/update/{pid}")
     ProductPojo updateProduct(@Valid @RequestBody ProductPojo productPojo) throws ApplicationException {
         return productService.updateProductService(productPojo);
     }
 
     //  Delete endPoint Api - Delete by id
-    // http://localhost:7777/api/products/5
-    @DeleteMapping("products/{pid}")
+    // http://localhost:7777/api/products/delete/5
+    // @DeleteMapping("products/{pid}")
+    //For Rowel Team Product - JWT Specific Mapping
+    @DeleteMapping("products/delete/{pid}")
     boolean deleteProduct(@PathVariable("pid") int productId) throws ApplicationException{
         return productService.deleteProductService(productId);
     }
 
     //  Get endPoint Api - Retrieve One Product by id
-    // http://localhost:7777/api/products/8
-    @GetMapping("products/{pid}")
+    // http://localhost:7777/api/products/getone/8
+    //@GetMapping("products/{pid}")
+    //For Rowel Team Product  JWT Specific Mapping
+    @GetMapping("products/getone/{pid}")
     ProductPojo getAProduct(@PathVariable("pid") int productId) throws ApplicationException{
         return productService.getAProductService(productId);
     }
 
     //  Get endPoint Api - List All Products
-    // http://localhost:7777/api/products
-    @GetMapping("products")
+    // http://localhost:7777/api/products/getAll
+    //@GetMapping("products")
+    //For Rowel Team Product - JWT Specific Mapping
+    @GetMapping("products/getall")
     List<ProductPojo> getAllProducts() throws ApplicationException{
         return productService.getAllProductService();
     }
-
-    //-------endpoints  only for Get one or ALl  DiscountProduct(s) - JoinPojo related
-    //  Get endPoint Api - List All discounted Products
-    // http://localhost:7777/api/alldiscountedproducts
-
-    //  Get endPoint Api - List One discounted Product
-    // http://localhost:7777/api/onediscountedproducts
 
 }

@@ -16,17 +16,16 @@ import com.project3.revtech.service.ProductDiscountService;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path ="combined")
+@RequestMapping(path ="discount")
 public class DiscountedProductController {
 	
 	@Autowired
 	ProductDiscountService productDiscountService;
 	
+	
 	//Returns all Products along with there discounts
-    @GetMapping("Disc/Products")
+    @GetMapping("all/discountedProducts")
     List<ProductAndDiscountPojo> getAllProducts() throws ApplicationException{
         return productDiscountService.getAllDiscountedProducts();
     }
-
-
 }

@@ -69,13 +69,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .authorizeRequests().antMatchers("/api/product-discount").permitAll().and()
       .authorizeRequests().antMatchers("/api/product-discount/**").permitAll().and()
       .authorizeRequests().antMatchers("/api/products").permitAll().and()
+      .authorizeRequests().antMatchers("/api/products/**").permitAll().and()
       .authorizeRequests().antMatchers("/api/auth/signup").permitAll().and()
       .authorizeRequests().antMatchers("/combined/Disc/Products").permitAll().and()
 	  .authorizeRequests().antMatchers("/api/products/{pid}").permitAll().and()
 	  .authorizeRequests().antMatchers("/file/upload").permitAll().and()
-      .authorizeRequests().antMatchers("/discounts/update").permitAll().and()
-      .authorizeRequests().antMatchers("/discounts/remove/{discId}").permitAll().and()
-      .authorizeRequests().antMatchers("/discounts/add").permitAll().and()
+      .authorizeRequests().antMatchers("/discount/update/discounts/**").permitAll().and()
+      .authorizeRequests().antMatchers("/discount/remove/discounts/{discId}/**").permitAll().and()
+      .authorizeRequests().antMatchers("/discount/add/discounts/**").permitAll().and()
+      .authorizeRequests().antMatchers("/discount/all/discounts/**").permitAll().and()
+      .authorizeRequests().antMatchers("/discount/all/discountedProducts/**").permitAll().and()
       .authorizeRequests().antMatchers("/api/transaction").permitAll().and()
       .authorizeRequests().antMatchers("/api/transaction/**").permitAll().and()
       .authorizeRequests().antMatchers("/api/cart-items").permitAll().and()
@@ -93,6 +96,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	   http.headers().frameOptions().disable();
 
 		  
+	   
 	   http.addFilterBefore(authenticationJwtTokenFilter(),
 	   UsernamePasswordAuthenticationFilter.class);
 		 

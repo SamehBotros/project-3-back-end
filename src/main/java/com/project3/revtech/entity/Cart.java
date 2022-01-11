@@ -12,7 +12,7 @@ import lombok.ToString;
 // @Getter
 // @Setter
 // @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name = "cart_details")
 public class Cart {
@@ -141,5 +141,19 @@ public class Cart {
 
 	public void setCartRemoved(boolean cartRemoved) {
 		this.cartRemoved = cartRemoved;
+	}
+
+	@Override
+	public String toString() {
+		return "Cart{" +
+				"cartId=" + cartId +
+				", transaction=" + transaction +
+				", userId=" + userId +
+				", user=" + user +
+				", cartItems=" + cartItems +
+				", cartTotal=" + cartTotal +
+				", cartPaid=" + cartPaid +
+				", cartRemoved=" + cartRemoved +
+				'}';
 	}
 }

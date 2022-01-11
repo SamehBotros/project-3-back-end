@@ -55,4 +55,15 @@ public class CartPojo {
     public void setCartRemoved(boolean cartRemoved) {
         this.cartRemoved = cartRemoved;
     }
+
+    @Override
+    public String toString() {
+        return "CartPojo{" +
+                "cartId=" + cartId +
+                ", userId=" + userId +
+                ", cartTotal=" + cartTotal +
+                ", cartPaid=" + cartPaid +
+                ", cartRemoved=" + cartRemoved +
+                '}';
+    }
 }

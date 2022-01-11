@@ -10,7 +10,7 @@ import lombok.ToString;
 // @Getter
 // @Setter
 // @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name = "cart_items")
 public class CartItem {
@@ -110,5 +110,17 @@ public class CartItem {
 		this.cartId = cartId;
 		this.productId = productId;
 		this.cartQty = cartQty;
+	}
+
+	@Override
+	public String toString() {
+		return "CartItem{" +
+				"cartItemId=" + cartItemId +
+				", cartId=" + cartId +
+				", productId=" + productId +
+				", product=" + product +
+				", cart=" + cart +
+				", cartQty=" + cartQty +
+				'}';
 	}
 }

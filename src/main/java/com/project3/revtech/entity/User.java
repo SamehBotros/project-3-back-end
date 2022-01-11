@@ -1,6 +1,7 @@
 package com.project3.revtech.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -47,9 +48,9 @@ public class User {
   @NotBlank
   @Size(min = 10)
   private String contact;
-  
-  
 
+  @OneToMany(mappedBy = "product")
+  private List<Review> reviews;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(  name = "user_roles", 

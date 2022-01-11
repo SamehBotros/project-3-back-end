@@ -13,12 +13,12 @@ public class CartItemProductController {
     @Autowired
     CartItemProductServiceImpl cartItemProductService;
 
-    @GetMapping("cart/{bid}")
+    @GetMapping("cart/{bid}/get")
     CartAndItemsPojo getCart(@PathVariable("bid") int cartId) {
         return cartItemProductService.getAllCartItemProducts(cartId);
     }
 
-    @GetMapping("user/{bid}")
+    @GetMapping("user/{bid}/get")
     CartAndItemsPojo getCartByUser(@PathVariable("bid") int userId) {
         return cartItemProductService.getAllCartItemProductsForUser(userId);
     }

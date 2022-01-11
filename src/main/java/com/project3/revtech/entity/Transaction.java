@@ -1,21 +1,11 @@
 package com.project3.revtech.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -47,6 +37,10 @@ public class Transaction {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cart_id", nullable = false, insertable = false, updatable = false)
 	private Cart cart;
+
+	@OneToMany(mappedBy = "transaction")
+	private List<PurchasedItem> purchasedItems;
+
 
 	public Transaction(int transactionId, @NotNull Timestamp transactionDate, int cartId, Cart cart) {
 		super();
@@ -88,5 +82,13 @@ public class Transaction {
 
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
+	}
+
+	public List<PurchasedItem> getPurchasedItems() {
+		return purchasedItems;
+	}
+
+	public void setPurchasedItems(List<PurchasedItem> purchasedItems) {
+		this.purchasedItems = purchasedItems;
 	}
 }

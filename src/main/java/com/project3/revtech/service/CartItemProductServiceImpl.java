@@ -57,7 +57,8 @@ public class CartItemProductServiceImpl implements CartItemProductService {
                     tempProduct.getProductName(), tempProduct.getProductCost(), tempProduct.getProductCategory(),
                     tempProduct.getProductDescription(), tempProduct.getProductQty(), tempProduct.getImageUrl(),
                     tempProduct.isProductRemoved(), tempDiscount.getDiscountId(), tempDiscount.getDiscountDescription(),
-                    tempDiscount.getDiscountPercentage());
+                    tempDiscount.getDiscountPercentage()
+            );
 
             ItemProductDiscountPojo tempIPD = new ItemProductDiscountPojo(tempItem.getCartItemId(), tempItem.getCartId(), tempItem.getProductId(), tempItem.getCartQty(), tempPAD);
             joinedDataItems.add(tempIPD);

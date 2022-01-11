@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,16 +34,19 @@ public class DiscountController {
 	}
 	
 	@PostMapping("add/discounts")
+    @PreAuthorize("hasRole('ADMIN')")
 	DiscountPojo addDiscount( @Valid @RequestBody DiscountPojo discount) throws ApplicationException{
 		return discountService.addDiscount(discount);
 	}
 	
 	
 	@DeleteMapping("remove/discounts/{discId}")
+    @PreAuthorize("hasRole('ADMIN')")
 	boolean removeDiscount(@PathVariable("discId") int discId) throws ApplicationException{
 		return discountService.removeDiscount(discId);
 	}	
 	@PutMapping("update/discounts")
+    @PreAuthorize("hasRole('ADMIN')")
 	DiscountPojo updateDiscount(@Valid @RequestBody DiscountPojo discountPojo) throws ApplicationException{
 		return discountService.updateDiscount(discountPojo);
 	}

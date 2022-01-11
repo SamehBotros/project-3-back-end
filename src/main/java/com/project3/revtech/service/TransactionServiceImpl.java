@@ -38,9 +38,9 @@ public class TransactionServiceImpl implements TransactionService{
 
 	@Override
 	public TransactionPojo getTransactionById(int transactionId) {
-		Optional<Transaction> optional = this.transactionRepository.findById(transactionId);
+		Transaction transaction = transactionRepository.getById(transactionId);
 		
-		Transaction transaction = optional.get();
+//		Transaction transaction = optional.get();
 		TransactionPojo transactionPojo = new TransactionPojo(transaction.getTransactionId(), transaction.getTransactionDate(), transaction.getCartId());
 			
 		return transactionPojo;

@@ -16,7 +16,7 @@ public class ProductAndDiscountController {
     @Autowired
     ProductDiscountServiceImpl productDiscountService;
 
-    @GetMapping("{bid}")
+    @GetMapping("{bid}/get")
     ResponseEntity<ProductAndDiscountPojo> getItem(@PathVariable("bid") int productId) throws ApplicationException {
         return ResponseEntity.ok()
                 .header("Content-type", "application/json")
